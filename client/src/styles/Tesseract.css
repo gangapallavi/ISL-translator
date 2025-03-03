@@ -1,0 +1,402 @@
+/* App.css */
+
+:root {
+  --primary-color: #3a86ff;
+  --primary-dark: #2667cc;
+  --secondary-color: #8338ec;
+  --accent-color: #ff006e;
+  --success-color: #4CAF50;
+  --error-color: #f44336;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #495057;
+  --text-color: #212529;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --border-radius: 8px;
+}
+
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  font-size: 16px; /* Base font size */
+}
+
+/* App container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem; /* Increased padding for larger screens */
+  max-width: 1800px; /* Maximum width for ultra-wide screens */
+  margin: 0 auto; /* Center content */
+}
+
+/* Main heading */
+.main-heading {
+  font-size: 2.25rem; /* Larger font for bigger screens */
+  font-weight: 600;
+  margin-bottom: 2rem; /* More space below heading */
+  color: var(--text-color);
+  text-align: center; /* Center the heading */
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  max-width: 1600px; /* Increased max-width */
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem; /* Add some padding on the sides */
+}
+
+/* Card component */
+.card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  padding: 2rem; /* More padding inside cards */
+  margin-bottom: 2rem; /* More space between cards */
+  transition: var(--transition);
+}
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.75rem; /* Larger buttons */
+  border-radius: 6px; /* Slightly larger radius */
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  font-size: 1.1rem; /* Larger font for buttons */
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+  background-color: var(--medium-gray);
+  color: var(--dark-gray);
+}
+
+.btn-secondary:hover {
+  background-color: #dde1e4;
+  transform: translateY(-2px);
+}
+
+/* Chapter cards grid (before selection) */
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Responsive grid */
+  gap: 2rem; /* More space between grid items */
+  max-width: 1400px; /* Increased max-width */
+  margin: 0 auto;
+}
+
+/* Chapter card */
+.chapter-card {
+  border-left: 5px solid var(--primary-color); /* Slightly thicker border */
+  transition: var(--transition);
+}
+
+.chapter-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-card.active {
+  border-left-color: var(--accent-color);
+  background-color: #fafafa;
+}
+
+.chapter-card h2 {
+  color: var(--primary-dark);
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem; /* Larger headings */
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown select */
+.dropdown {
+  width: 100%;
+  padding: 0.85rem 1.25rem; /* Larger dropdown */
+  border: 1px solid var(--medium-gray);
+  border-radius: 6px;
+  font-size: 1.1rem; /* Larger font */
+  background-color: white;
+  color: var(--dark-gray);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  transition: var(--transition);
+}
+
+.dropdown:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.25);
+}
+
+/* Layout after topic selection */
+.content-layout {
+  display: flex;
+  gap: 3rem; /* More space between sidebar and content */
+  align-items: flex-start;
+}
+
+.chapters-sidebar {
+  width: 30%; /* Slightly smaller percentage for sidebar */
+  flex-shrink: 0;
+  position: sticky;
+  top: 2rem;
+}
+
+.content-area {
+  flex: 1;
+}
+
+/* Video card */
+.video-card {
+  margin-bottom: 2.5rem; /* More space below video cards */
+  overflow: hidden;
+}
+
+.video-header {
+  margin-bottom: 1.5rem;
+}
+
+.video-header h3 {
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.4rem; /* Larger headings */
+}
+
+.video-header .chapter {
+  color: var(--primary-dark);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.video-header .topic {
+  color: var(--dark-gray);
+  font-size: 1.1rem; /* Larger font */
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+}
+
+/* Quiz card */
+.quiz-card {
+  padding: 2rem; /* More padding */
+}
+
+.quiz-card h2 {
+  color: var(--secondary-color);
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem; /* Larger heading */
+}
+
+.quiz-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.quiz-intro p {
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem; /* Larger text */
+}
+
+.quiz-active {
+  display: flex;
+  flex-direction: column;
+}
+
+.instructions {
+  margin-bottom: 1.25rem;
+  color: var(--dark-gray);
+  font-weight: 500;
+  font-size: 1.1rem; /* Larger instructions */
+}
+
+.status-message {
+  margin: 2rem 0;
+  padding: 2rem;
+  background-color: var(--light-gray);
+  border-radius: var(--border-radius);
+  text-align: center;
+  color: var(--dark-gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem; /* Larger text */
+}
+
+/* Spinner animation */
+.spinner {
+  width: 50px; /* Larger spinner */
+  height: 50px;
+  margin-bottom: 1.25rem;
+  border: 5px solid var(--medium-gray);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.result-container {
+  margin: 1.5rem 0;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.result-container.correct {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-left: 5px solid var(--success-color);
+}
+
+.result-container.incorrect {
+  background-color: rgba(244, 67, 54, 0.1);
+  border-left: 5px solid var(--error-color);
+}
+
+.result-container h3 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem; /* Larger heading */
+  font-weight: 600;
+}
+
+.result-container.correct h3 {
+  color: var(--success-color);
+}
+
+.result-container.incorrect h3 {
+  color: var(--error-color);
+}
+
+.result-container p {
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem; /* Larger text */
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1.5rem; /* More space between buttons */
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Responsive styles - enhanced for larger screens */
+@media (min-width: 1600px) {
+  body {
+    font-size: 18px; /* Larger base font size for very large screens */
+  }
+  
+  .main-heading {
+    font-size: 2.5rem;
+  }
+  
+  .content-layout {
+    gap: 4rem;
+  }
+  
+  .chapter-card h2 {
+    font-size: 1.75rem;
+  }
+  
+  .video-header h3 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Keep existing media queries for smaller screens */
+@media (max-width: 992px) {
+  .content-layout {
+    flex-direction: column;
+  }
+  
+  .chapters-sidebar {
+    width: 100%;
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 0;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+  
+  .chapters-grid {
+    width: 100%;
+  }
+}
+
+/* Additional medium sized screens */
+@media (min-width: 992px) and (max-width: 1400px) {
+  .chapters-sidebar {
+    width: 35%;
+  }
+  
+  .chapters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .chapters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .app-container {
+    padding: 1.5rem 2rem;
+  }
+}

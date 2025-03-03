@@ -1,0 +1,46 @@
+# Node.js
+# Ignore caches
+client/.cache/
+client/.next/
+client/.parcel-cache/
+
+# Ignore dependencies and build files
+client/node_modules/
+client/build/
+
+# Ignore logs and environment files
+client/.env
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+
+# Flask
+myven/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+logs/
+*.log
+
+# IDE and Editor Files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Python Virtual Environment
+.env
+.venv
+env
+
+# Misc
+*.bak
+Thumbs.db

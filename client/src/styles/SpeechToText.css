@@ -1,0 +1,31 @@
+/* SpeechToText.css
+.container {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 500px;
+}
+
+.record-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background 0.3s;
+}
+
+.record-btn.listening {
+    background-color: #dc3545;
+}
+
+.text-box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 18px;
+    text-align: left;
+} */

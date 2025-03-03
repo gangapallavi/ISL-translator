@@ -1,0 +1,168 @@
+/* SignLanguageTranslator.css */
+
+.sign-language-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .header {
+    background-color: #4a6cf7;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    margin: 0 0 10px 0;
+    font-size: 2.5rem;
+  }
+
+  .header p {
+    margin: 0;
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+
+  .main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .video-section, 
+  .results-section {
+    flex: 1;
+    min-width: 300px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .video-container {
+    width: 100%;
+    height: 400px;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .video-container iframe {
+    border: none;
+  }
+
+  .current-sign {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #4c84af;
+    text-align: center;
+    min-height: 70px;
+    margin: 20px 0;
+  }
+
+  .connection-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .connection-status.connected {
+    background-color: #dff2bf;
+    color: #4F8A10;
+  }
+
+  .connection-status.disconnected {
+    background-color: #ffbaba;
+    color: #D8000C;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  button {
+    padding: 12px 24px;
+    background-color: #4c7daf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+
+  .sentence-container, 
+  .history-container {
+    margin-bottom: 20px;
+  }
+
+  .sentence, 
+  .history-list {
+    min-height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+  }
+
+  .history-list {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .history-item {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .info-section {
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .signs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .sign-badge {
+    background-color: #e7f3ff;
+    border: 1px solid #b6d4fe;
+    color: #0a58ca;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      flex-direction: column;
+    }
+  }
