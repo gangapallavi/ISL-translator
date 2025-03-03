@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Translator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .video-container {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .detection-results {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        #video-feed {
+            width: 100%;
+            height: 400px;
+            background-color: #000;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        #video-feed img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #current-sign {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #4CAF50;
+            min-height: 80px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #sentence-container {
+            min-height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        #history-container {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        .history-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .status.connected {
+            background-color: #dff2bf;
+            color: #4F8A10;
+        }
+        .status.disconnected {
+            background-color: #ffbaba;
+            color: #D8000C;
+        }
+        .info-section {
+            margin-top: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .supported-signs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .sign-badge {
+            background-color: #e7f3ff;
+            border: 1px solid #b6d4fe;
+            color: #0a58ca;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sign Language Translator</h1>
+            <p class="subtitle">Real-time sign language detection and translation</p>
+        </header>
+
+        <div class="main-content">
+            <div class="video-container">
+                <h2>Camera Feed</h2>
+                <div id="video-feed">
+                    <img id="camera-stream" src="/video_feed" alt="Camera Feed">
+                </div>
+                <div id="current-sign">Ready...</div>
+                <div id="camera-status" class="status disconnected">Camera Disconnected</div>
+                <div class="controls">
+                    <button id="start-btn">Start Detection</button>
+                    <button id="stop-btn" disabled>Stop Detection</button>
+                </div>
+            </div>
+
+            <div class="detection-results">
+                
+                <button id="speak-btn">Speak Sentence</button>
+                <button id="clear-btn">Clear Sentence</button>
+                
+                <h3>Translation History</h3>
+                <div id="history-container">
+                    <div class="history-item">No previous translations yet.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Supported Sign Language Gestures</h2>
+            <div class="supported-signs">
+                <div class="sign-badge">Hello</div>
+                <div class="sign-badge">I love you</div>
+                <div class="sign-badge">No</div>
+                <div class="sign-badge">Okay</div>
+                <div class="sign-badge">Please</div>
+                <div class="sign-badge">Thank you</div>
+                <div class="sign-badge">Yes</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startBtn = document.getElementById('start-btn');
+            const stopBtn = document.getElementById('stop-btn');
+            const speakBtn = document.getElementById('speak-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const currentSign = document.getElementById('current-sign');
+            const sentenceContainer = document.getElementById('sentence-container');
+            const historyContainer = document.getElementById('history-container');
+            const cameraStatus = document.getElementById('camera-status');
+            
+            let isDetecting = false;
+            let updateIntervalId = null;
+            
+            // Audio element for playing TTS
+            const audioPlayer = new Audio();
+            
+            // Set up camera stream
+            const cameraStream = document.getElementById('camera-stream');
+            cameraStream.onload = function() {
+                cameraStatus.className = 'status connected';
+                cameraStatus.textContent = 'Camera Connected';
+            };
+            
+            cameraStream.onerror = function() {
+                cameraStatus.className = 'status disconnected';
+                cameraStatus.textContent = 'Camera Disconnected';
+            };
+            
+            startBtn.addEventListener('click', function() {
+                // Start detection on the server
+                fetch('/start_detection')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'started') {
+                            isDetecting = true;
+                            startBtn.disabled = true;
+                            stopBtn.disabled = false;
+                            currentSign.textContent = 'Detecting...';
+                            
+                            // Start polling for updates
+                            updateIntervalId = setInterval(updateData, 500);
+                        }
+                    })
+                    .catch(error => console.error('Error starting detection:', error));
+            });
+            
+            stopBtn.addEventListener('click', function() {
+                // Stop detection on the server
+                fetch('/stop_detection')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'stopped') {
+                            isDetecting = false;
+                            startBtn.disabled = false;
+                            stopBtn.disabled = true;
+                            currentSign.textContent = 'Detection Stopped';
+                            
+                            // Stop polling for updates
+                            clearInterval(updateIntervalId);
+                        }
+                    })
+                    .catch(error => console.error('Error stopping detection:', error));
+            });
+            
+            speakBtn.addEventListener('click', function() {
+                // Trigger speech on the server
+                fetch('/speak_sentence')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Play the audio received from the server
+                            const audioSrc = 'data:audio/mp3;base64,' + data.audio_data;
+                            audioPlayer.src = audioSrc;
+                            audioPlayer.play();
+                            
+                            // Add to history
+                            addToHistory(data.text);
+                            
+                            // Update sentence display
+                            updateSentenceDisplay([]);
+                        } else if (data.status === 'empty') {
+                            console.log('No sentence to speak');
+                        }
+                    })
+                    .catch(error => console.error('Error speaking sentence:', error));
+            });
+            
+            clearBtn.addEventListener('click', function() {
+                // Clear sentence on the server
+                fetch('/clear_sentence')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'cleared') {
+                            updateSentenceDisplay([]);
+                        }
+                    })
+                    .catch(error => console.error('Error clearing sentence:', error));
+            });
+            
+            function updateData() {
+                if (!isDetecting) return;
+                
+                fetch('/get_current_data')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update current sign
+                        if (data.current_sign) {
+                            currentSign.textContent = data.current_sign;
+                        }
+                        
+                        // Update sentence
+                        updateSentenceDisplay(data.current_sentence);
+                    })
+                    .catch(error => console.error('Error getting current data:', error));
+            }
+            
+            function updateSentenceDisplay(sentence) {
+                if (!sentence || sentence.length === 0) {
+                    sentenceContainer.textContent = 'Waiting for signs...';
+                } else {
+                    sentenceContainer.textContent = sentence.join(' ');
+                }
+            }
+            
+            function addToHistory(text) {
+                // Clear "No previous translations" message if it exists
+                if (historyContainer.textContent.includes('No previous translations yet')) {
+                    historyContainer.innerHTML = '';
+                }
+                
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.textContent = text;
+                
+                // Insert at the top
+                if (historyContainer.firstChild) {
+                    historyContainer.insertBefore(historyItem, historyContainer.firstChild);
+                } else {
+                    historyContainer.appendChild(historyItem);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

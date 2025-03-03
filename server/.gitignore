@@ -1,0 +1,38 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# React
+build/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Flask
+myven/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+logs/
+*.log
+
+# IDE and Editor Files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Python Virtual Environment
+.env
+.venv
+env
+
+# Misc
+*.bak
+Thumbs.db
