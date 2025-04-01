@@ -14,7 +14,7 @@ The **ISL Translator** is an AI-powered tool that converts Indian Sign Language 
 - **Backend:** Node.js (if needed)
 - **AI/ML Models:** TensorFlow, OpenCV, MediaPipe, or any model used for gesture recognition
 - **Speech API:** Text-to-Speech (TTS) for audio output
-- **Other Libraries/Tools:** [List any other libraries you used]
+  
 
 ## Installation
 To run the project locally:
@@ -24,8 +24,9 @@ To run the project locally:
    git clone https://github.com/your-username/ISL-translator.git
    cd ISL-translator
 2.Install dependencies:
-  sh
+  ```sh
   npm install
 3.Run the project
+  ```sh
   npm start
 4.Open the browser and visit http://localhost:3000 to see the ISL translator in action.
