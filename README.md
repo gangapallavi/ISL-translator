@@ -10,9 +10,9 @@ The **ISL Translator** is an AI-powered tool that converts Indian Sign Language 
 - **User-Friendly Interface:** Simple and intuitive interface to ease communication.
 
 ## Technologies Used
-- **Frontend:** React.js (or your chosen framework)
-- **Backend:** Node.js (if needed)
-- **AI/ML Models:** TensorFlow, OpenCV, MediaPipe, or any model used for gesture recognition
+- **Frontend:** React.js 
+- **Backend:** Flask
+- **AI/ML Models:**  OpenCV, MediaPipe
 - **Speech API:** Text-to-Speech (TTS) for audio output
   
 
